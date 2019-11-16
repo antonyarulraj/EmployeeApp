@@ -1,0 +1,78 @@
+﻿@model EmployeeApp.Data.Models.Employee
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <div class="row">
+        <div class="col-6">
+            <h4>Employee details</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DateOfBirth)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DateOfBirth)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Company)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Company)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Salary)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Salary)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Department)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Department)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-6">
+            <h4>Address</h4>
+            <hr />
+            @if (Model.Addresses != null)
+            {
+            <div class="row">
+                @foreach (var address in Model.Addresses)
+                {
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <p>@address.Street,</p>
+                                <p>@address.City,</p>
+                                <p>@address.State,</p>
+                                <p>@address.Country - @address.Zipcode</p>
+                                <a asp-controller="Addresses" asp-action="Delete" asp-route-id="@address.Id" class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            }
+            <br />
+            <a asp-controller="Addresses" asp-action="Create" class="btn btn-primary">Add Address</a>
+        </div>
+    </div>
+</div>
+<hr />
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
